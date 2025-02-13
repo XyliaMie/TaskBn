@@ -1,12 +1,8 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollViewComponent } from "react-native";
 import React from "react";
 
 const customerHomepage = () => {
-  return (
-    <View>
-      <Text>customerHomepage</Text>
-    </View>
-  );
+  return;
 };
 
 export default customerHomepage;

@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
-import "@/global.css";
+import { ICONS } from "@/constants/tabIcons";
 
 const TabIcon = ({
   focused,
@@ -12,8 +12,8 @@ const TabIcon = ({
   icon: any;
   title: string;
 }) => (
-  <view>
-    <Image />
+  <view className="flex-1 mt-3 flex flex-col items-center">
+    <Image source={icon} tintColor={focused ? "#FFFFFF" : "#FECE26"} />
   </view>
 );
 
@@ -29,7 +29,17 @@ const TabsLayout = () => {
           minHeight: 50,
         },
       }}
-    ></Tabs>
+    >
+      <Tabs.Screen
+        name="customerHomepage"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon={ICONS.homeIcon} focused={focused} title="Home" />
+          ),
+        }}
+      />
+    </Tabs>
   );
 };
 export default TabsLayout;
