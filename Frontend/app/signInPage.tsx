@@ -6,11 +6,10 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import BlueBgn2 from "../../components/blueBgn2";
+import BlueBgn2 from "../components/blueBgn2";
 import { IMAGES } from "@/constants/image";
 import { Link } from "expo-router";
 
@@ -41,9 +40,9 @@ const signInPage = () => {
             <TextInput
               placeholder="Please enter email."
               className="bg-gray-100 border border-gray-300 rounded-lg w-4/5 px-4 py-3
-              value={email}
-              onChangeText={setEmail}
-              secureTextEntry"
+                value={email}
+                onChangeText={setEmail}
+                secureTextEntry"
             />
           </View>
 

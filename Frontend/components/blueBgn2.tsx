@@ -4,7 +4,7 @@ import { IMAGES } from "@/constants/image"; // Ensure the correct import path
 
 const { width, height } = Dimensions.get("window");
 
-const blueBgn = () => {
+const blueBgn2 = () => {
   return (
     <ImageBackground
       source={IMAGES.backgroundBlue2}
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default blueBgn;
+export default blueBgn2;
