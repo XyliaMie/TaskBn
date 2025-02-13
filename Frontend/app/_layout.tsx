@@ -22,6 +22,7 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: "rgb(81, 131, 168)",
           position: "absolute",
@@ -31,7 +32,6 @@ const TabsLayout = () => {
     ></Tabs>
   );
 };
-
 export default TabsLayout;
 
 const styles = StyleSheet.create({});

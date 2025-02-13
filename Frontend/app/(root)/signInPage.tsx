@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import BlueBgn2 from "../components/blueBgn2";
+import BlueBgn2 from "@/components/blueBgn2";
 import { IMAGES } from "@/constants/image";
 import { Link } from "expo-router";
 
