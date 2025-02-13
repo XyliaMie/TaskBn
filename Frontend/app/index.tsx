@@ -1,16 +1,10 @@
-import { Link } from "expo-router";
 import { View } from "react-native";
+import SignInPage from "./(root)/signInPage";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Link href="/(root)/(tabs)/CustomersPage/customerHomepage"></Link>
+    <View>
+      <SignInPage />
     </View>
   );
 }
