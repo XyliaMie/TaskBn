@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
+import "../global.css";
 
 const TabIcon = ({
   focused,
@@ -24,7 +25,7 @@ const TabsLayout = () => {
         tabBarStyle: {
           backgroundColor: "rgb(81, 131, 168)",
           position: "absolute",
-          minHeight: 70,
+          minHeight: 50,
         },
       }}
     ></Tabs>
