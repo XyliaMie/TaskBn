@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
+const bcrypt = require("bcrypt"); 
+const jwt = require("jsonwebtoken"); 
 
 const app = express();
 app.use(cors());
@@ -34,20 +36,67 @@ app.get("/customers", async (req, res) => {
   }
 });
 
-// API Route: Create a New Customer
-app.post("/customers", async (req, res) => {
+//================================ USER REGISTER AND LOGIN API ==================================//
+// API Route: Register User
+app.post("/register", async (req, res) => {
   try {
-    const { firstName, lastName, email, password, address, postalCode, latitude, longitude } = req.body;
+    const { firstName, lastName, email, password, address, postalCode} = req.body;
+
+    //Check if this user ada sudah
+    const userExists = await pool.query("SELECT * FROM customers WHERE email =$1", [email]);
+    if (userExists.rows.length > 0) {
+      return res.status(400).json({error: "User already exists"});
+    }
+
+    //Password beKABAT
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // New user register
     const newUser = await pool.query(
-      "INSERT INTO customers (firstName, lastName, email, password, address, postalCode, location) VALUES ($1, $2, $3, $4, $5, $6, ST_GeogFromText('SRID=4326;POINT(' || $7 || ' ' || $8 || ')')) RETURNING *",
-      [firstName, lastName, email, password, address, postalCode, longitude, latitude] 
+      "INSERT INTO customers (firstName, lastName, email, password, address, postalCode) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [firstName, lastName, email, hashedPassword, address, postalCode] 
     );
-    res.json(newUser.rows[0]);
+
+    res.json({message: "User registered successfully", user: newUser.rows[0]});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 });
+
+//API Route: User Login
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if user exists
+    const user = await pool.query("SELECT * FROM customers WHERE email = $1", [email]);
+    if (user.rows.length === 0) {
+      return res.status(400).json({ error: "Salah tu bui passwad mu ah. Try again" });
+    }
+
+    // Check password
+    const validPassword = await bcrypt.compare(password, user.rows[0].password);
+    if (!validPassword) {
+      return res.status(400).json({ error: "Salah tu bui passwad mu ah. Try again" });
+    }
+
+    // Generate JWT Token
+    const token = jwt.sign(
+      { id: user.rows[0].id, email: user.rows[0].email }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: "7d" } // Token expires in 7 days
+    );
+
+    res.json({ message: "Login successful", token });
+  } catch (err) {
+    console.error("Error logging in:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+//========================== END ==========================================================================//
 
 // Start Express Server
 const PORT = process.env.PORT || 5000;

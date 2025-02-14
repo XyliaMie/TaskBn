@@ -1,11 +1,5 @@
-import { View } from "react-native";
-import SignInPage from "./(root)/signInPage";
-import { SplashScreen } from "expo-router";
+import { Redirect } from "expo-router";
 
 export default function Index() {
-  return (
-    <View>
-      <SignInPage />
-    </View>
-  );
+  return <Redirect href="/signInPage" />;
 }

@@ -1,9 +1,26 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  ActivityIndicator,
+  Text,
+  View,
+} from "react-native";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ServiceCategoryBar from "@/components/serviceCategoryBar";
+import { BackHandler } from "react-native";
 
 const customerHomepage = () => {
+  useEffect(() => {
+    const handleBackPress = () => {
+      return true;
+    };
+
+    BackHandler.addEventListener("hardwareBackPress", handleBackPress);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", handleBackPress);
+  }, []);
+
   const handleCategoryPress = (category: string) => {
     console.log("Selected Category:", category);
     // nanti tmbh sini: Navigate to service listings filtered by this category
@@ -12,6 +29,7 @@ const customerHomepage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        {/* Service Categories */}
         <ServiceCategoryBar onCategoryPress={handleCategoryPress} />
       </ScrollView>
     </SafeAreaView>

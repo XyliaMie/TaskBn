@@ -2,7 +2,6 @@ import { StyleSheet, Image, View } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { ICONS } from "@/constants/tabIcons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const TabIcon = ({
   focused,
@@ -103,9 +102,13 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="customerProfilePage"
         options={{
-          title: "Activity",
+          title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <TabIcon icon={ICONS.profileIcon} focused={focused} title="Home" />
+            <TabIcon
+              icon={ICONS.profileIcon}
+              focused={focused}
+              title="Profile"
+            />
           ),
         }}
       />
