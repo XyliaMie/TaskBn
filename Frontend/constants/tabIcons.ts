@@ -3,6 +3,6 @@ export const ICONS = {
     activityIcon: require("../assets/icons/activityTabWhite.png"),
     searchIcon: require("../assets/icons/searchTabWhite.png"),
     messageIcon: require("../assets/icons/msgTabWhite.png"),
-    profileIcon: require("../assets/icons/profileTabWhite.png")
-
+    profileIcon: require("../assets/icons/profileTabWhite.png"),
+    moreBtn1: require("../assets/icons/moreBtn.png"),
 };

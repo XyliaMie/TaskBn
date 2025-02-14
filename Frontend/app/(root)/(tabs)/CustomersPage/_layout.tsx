@@ -2,6 +2,7 @@ import { StyleSheet, Image, View } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { ICONS } from "@/constants/tabIcons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const TabIcon = ({
   focused,
@@ -26,14 +27,28 @@ const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
+        headerShown: true,
+        headerTitleAlign: "center",
         headerStyle: {
           backgroundColor: "#5183A8",
           borderBottomLeftRadius: 30,
           borderBottomRightRadius: 30,
           height: 140,
+          elevation: 5,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 5 },
+          shadowOpacity: 0.2,
+          shadowRadius: 10,
         },
+
+        //Might be remove later once component masuk
+        headerTitleStyle: {
+          color: "white",
+          fontSize: 30,
+          fontWeight: "bold",
+        },
+
         tabBarShowLabel: false,
-        headerShown: true,
         tabBarStyle: {
           backgroundColor: "rgb(81, 131, 168)",
           position: "absolute",
